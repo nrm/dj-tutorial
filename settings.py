@@ -49,7 +49,8 @@ MEDIA_URL = ''
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
-STATIC_ROOT = ''
+#STATIC_ROOT = ''
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
@@ -85,6 +86,17 @@ TEMPLATE_LOADERS = (
 #     'django.template.loaders.eggs.Loader',
 )
 
+TEMPLATE_CONTEXT_PROCESSORS = (
+    # default template context processors
+    'django.core.context_processors.auth',
+    'django.core.context_processors.debug',
+    'django.core.context_processors.i18n',
+    'django.core.context_processors.media',
+
+    # required by django-admin-tools
+    'django.core.context_processors.request',
+)
+
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -104,6 +116,10 @@ TEMPLATE_DIRS = (
 )
 
 INSTALLED_APPS = (
+    'admin_tools.theming',
+    'admin_tools.menu',
+    'admin_tools.dashboard',
+
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -114,6 +130,8 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
+    'south',
+
     'polls',
 )
 
